@@ -51,6 +51,24 @@ const app = opine();
 
 
 addEventListener("fetch", (event) => {
+        
+  let rendered;
+  vueServerRenderer(App, (err:any, res:any) => {
+    rendered = res;
+  });
+  
+  const html =
+  `<html>
+     <head>
+     
+        ${styles}
+       
+     </head>
+     <body>
+       <div id="root">${rendered}</div>
+       <script type="module" src="./build.js"></script>
+     </body>
+   </html>`;
   // renderToString generates html string from JSX components.
   const response = new Response(html, {
     headers: { "content-type": "text/html; charset=uft-8" },
