@@ -47,10 +47,13 @@ const port = 3000
 
 
    addEventListener("fetch", (event) => {
+    import  vueServerRenderer from 'https://deno.land/x/vue_server_renderer@/mod.js';
+
+    import App from './vno-ssr/build.js';
     let rendered;
-    // vueServerRenderer(App, (err:any, res:any) => {
-    //   rendered = res;
-    // });
+    vueServerRenderer(App, (err:any, res:any) => {
+      rendered = res;
+    });
     
     const html =
     `<html>
