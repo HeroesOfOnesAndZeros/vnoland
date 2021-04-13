@@ -44,10 +44,6 @@ const port = 3000
 
 
 
-
-// You need to import `h` factory function as Deno Deploy
-// uses it instead of `React.createElement`
-
 let rendered;
   vueServerRenderer(App, (err:any, res:any) => {
     rendered = res;
@@ -65,30 +61,10 @@ let rendered;
        <script type="module" src="./build.js"></script>
      </body>
    </html>`;
-
-addEventListener("fetch", (event) => {
-        
-  let rendered;
-  vueServerRenderer(App, (err:any, res:any) => {
-    rendered = res;
+   
+   addEventListener("fetch", (event) => {
+    const response = new Response("Hello World!", {
+      headers: { "content-type": "text/plain" },
+    });
+    event.respondWith(response);
   });
-  
-  const html =
-  `<html>
-     <head>
-     
-        ${styles}
-       
-     </head>
-     <body>
-       <div id="root">${rendered}</div>
-       <script type="module" src="./build.js"></script>
-     </body>
-   </html>`;
-  // renderToString generates html string from JSX components.
-  const response = new Response(html, {
-    headers: { "content-type": "text/html; charset=uft-8" },
-  });
-
-  event.respondWith(response);
-});
