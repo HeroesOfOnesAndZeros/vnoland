@@ -44,25 +44,26 @@ const port = 3000
 
 
 
-// let rendered;
-//   vueServerRenderer(App, (err:any, res:any) => {
-//     rendered = res;
-//   });
-  
-//   const html =
-//   `<html>
-//      <head>
-     
-//         ${styles}
-       
-//      </head>
-//      <body>
-//        <div id="root">${rendered}</div>
-//        <script type="module" src="./build.js"></script>
-//      </body>
-//    </html>`;
+
 
    addEventListener("fetch", (event) => {
+    let rendered;
+    vueServerRenderer(App, (err:any, res:any) => {
+      rendered = res;
+    });
+    
+    const html =
+    `<html>
+       <head>
+       
+          ${styles}
+         
+       </head>
+       <body>
+         <div id="root">${rendered}</div>
+         <script type="module" src="./build.js"></script>
+       </body>
+     </html>`;
     const response = new Response("Hello World!", {
       headers: { "content-type": "text/plain" },
     });
