@@ -9,13 +9,13 @@ const port = 3000
 const app = opine();
 
 //app.use(serveStatic('vno-build'));
-app.use(serveStatic(resolve('vno-build')));
-app.use(serveStatic(resolve('src/assets')))
+// app.use(serveStatic(resolve('vno-build')));
+// app.use(serveStatic(resolve('src/assets')))
  const __dirname = dirname(import.meta.url);
 
 
 
-app.use("/", (req, res, next) => {
+//app.use("/", (req, res, next) => {
       
       let rendered;
       vueServerRenderer(App, (err:any, res:any) => {
@@ -35,10 +35,26 @@ app.use("/", (req, res, next) => {
          </body>
        </html>`;
 
-    res.type("text/html").send(html);
+    //res.type("text/html").send(html);
+  //});
+
+// app.listen({ port });
+  
+//console.log(`Vue SSR App listening on port ${port}`);
+
+
+
+
+// You need to import `h` factory function as Deno Deploy
+// uses it instead of `React.createElement`
+
+
+
+addEventListener("fetch", (event) => {
+  // renderToString generates html string from JSX components.
+  const response = new Response(html, {
+    headers: { "content-type": "text/html; charset=uft-8" },
   });
 
-app.listen({ port });
-  
-console.log(`Vue SSR App listening on port ${port}`);
-
+  event.respondWith(response);
+});
