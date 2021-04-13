@@ -6,7 +6,7 @@ import { join, dirname, resolve } from "https://deno.land/std@0.63.0/path/mod.ts
 import  styles  from './vno-ssr/style.js'
 
 const port = 3000
-const app = opine();
+// const app = opine();
 
 //app.use(serveStatic('vno-build'));
 // app.use(serveStatic(resolve('vno-build')));
@@ -17,23 +17,23 @@ const app = opine();
 
 //app.use("/", (req, res, next) => {
       
-      let rendered;
-      vueServerRenderer(App, (err:any, res:any) => {
-        rendered = res;
-      });
+      // let rendered;
+      // vueServerRenderer(App, (err:any, res:any) => {
+      //   rendered = res;
+      // });
       
-      const html =
-      `<html>
-         <head>
+      // const html =
+      // `<html>
+      //    <head>
          
-            ${styles}
+      //       ${styles}
            
-         </head>
-         <body>
-           <div id="root">${rendered}</div>
-           <script type="module" src="./build.js"></script>
-         </body>
-       </html>`;
+      //    </head>
+      //    <body>
+      //      <div id="root">${rendered}</div>
+      //      <script type="module" src="./build.js"></script>
+      //    </body>
+      //  </html>`;
 
     //res.type("text/html").send(html);
   //});
@@ -70,7 +70,7 @@ addEventListener("fetch", (event) => {
      </body>
    </html>`;
   // renderToString generates html string from JSX components.
-  const response = new Response(html, {
+  const response = new Response('hi', {
     headers: { "content-type": "text/html; charset=uft-8" },
   });
 
