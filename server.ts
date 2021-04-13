@@ -67,7 +67,7 @@ const port = 3000
          <script type="module" src="./build.js"></script>
        </body>
      </html>`;
-    const response = new Response("Hello World!", {
+    const response = new Response("Hello ss!", {
       headers: { "content-type": "text/plain" },
     });
     event.respondWith(response);
