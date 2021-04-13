@@ -48,9 +48,9 @@ const port = 3000
 
    addEventListener("fetch", (event) => {
     let rendered;
-    vueServerRenderer(App, (err:any, res:any) => {
-      rendered = res;
-    });
+    // vueServerRenderer(App, (err:any, res:any) => {
+    //   rendered = res;
+    // });
     
     const html =
     `<html>
