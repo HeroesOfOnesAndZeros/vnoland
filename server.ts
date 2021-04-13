@@ -14,12 +14,7 @@ const port = 3000
  const __dirname = dirname(import.meta.url);
 
 
- addEventListener("fetch", (event) => {
-  const response = new Response("Hello World!", {
-    headers: { "content-type": "text/plain" },
-  });
-  event.respondWith(response);
-});
+
 //app.use("/", (req, res, next) => {
       
       // let rendered;
@@ -53,31 +48,47 @@ const port = 3000
 // You need to import `h` factory function as Deno Deploy
 // uses it instead of `React.createElement`
 
-
-
-// addEventListener("fetch", (event) => {
-        
-//   let rendered;
-//   vueServerRenderer(App, (err:any, res:any) => {
-//     rendered = res;
-//   });
+let rendered;
+  vueServerRenderer(App, (err:any, res:any) => {
+    rendered = res;
+  });
   
-//   const html =
-//   `<html>
-//      <head>
+  const html =
+  `<html>
+     <head>
      
-//         ${styles}
+        ${styles}
        
-//      </head>
-//      <body>
-//        <div id="root">${rendered}</div>
-//        <script type="module" src="./build.js"></script>
-//      </body>
-//    </html>`;
-//   // renderToString generates html string from JSX components.
-//   const response = new Response('hi', {
-//     headers: { "content-type": "text/html; charset=uft-8" },
-//   });
+     </head>
+     <body>
+       <div id="root">${rendered}</div>
+       <script type="module" src="./build.js"></script>
+     </body>
+   </html>`;
 
-//   event.respondWith(response);
-// });
+addEventListener("fetch", (event) => {
+        
+  let rendered;
+  vueServerRenderer(App, (err:any, res:any) => {
+    rendered = res;
+  });
+  
+  const html =
+  `<html>
+     <head>
+     
+        ${styles}
+       
+     </head>
+     <body>
+       <div id="root">${rendered}</div>
+       <script type="module" src="./build.js"></script>
+     </body>
+   </html>`;
+  // renderToString generates html string from JSX components.
+  const response = new Response(html, {
+    headers: { "content-type": "text/html; charset=uft-8" },
+  });
+
+  event.respondWith(response);
+});
