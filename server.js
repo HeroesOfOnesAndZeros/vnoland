@@ -18,9 +18,9 @@ import  styles  from './vno-ssr/style.js'
 //app.use("/", (req, res, next) => {
   
      
-      let rendered = vueServerRenderer(App, (err, res) => {
-        return res;
-      });
+      // let rendered = vueServerRenderer(App, (err, res) => {
+      //   return res;
+      // });
       
       const html =
       `<html>
