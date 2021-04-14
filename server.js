@@ -18,22 +18,22 @@ import  styles  from './vno-ssr/style.js'
 //app.use("/", (req, res, next) => {
   
      
-      // let rendered = vueServerRenderer(App, (err, res) => {
-      //   return res;
-      // });
+      let rendered = vueServerRenderer(App, (err, res) => {
+        return res;
+      });
       
-      // const html =
-      // `<html>
-      //    <head>
+      const html =
+      `<html>
+         <head>
          
-      //       ${styles}
+            ${styles}
            
-      //    </head>
-      //    <body>
-      //      <div id="root">${rendered}</div>
-      //      <script type="module" src="./build.js"></script>
-      //    </body>
-      //  </html>`;
+         </head>
+         <body>
+           <div id="root">${rendered}</div>
+           <script type="module" src="./build.js"></script>
+         </body>
+       </html>`;
        
     
 
@@ -47,23 +47,41 @@ import  styles  from './vno-ssr/style.js'
 // You need to import `h` factory function as Deno Deploy
 // uses it instead of `React.createElement`
 
+function handleRequest(request) {
+  const { pathname } = new URL(request.url);
+
+  let rendered = vueServerRenderer(App, (err, res) => {
+    return res;
+  });
+  
+  const html =
+  `<html>
+     <head>
+     
+        ${styles}
+       
+     </head>
+     <body>
+       <div id="root">${rendered}</div>
+       <script type="module" src="./build.js"></script>
+     </body>
+   </html>`;
+ 
+   
+
+    return new Response(html, {
+      headers: {
+        // The "text/html" part implies to the client that the content is HTML
+        // and the "charset=UTF-8" part implies to the client that the content
+        // is encoded using UTF-8.
+        "content-type": "text/html; charset=UTF-8",
+      },
+    });
+  
+
+  
+}
 
 addEventListener("fetch", (event) => {
-  // renderToString generates html string from JSX components.
-  const response = new Response(`<html>
-    <head>
-    
-    
-      
-    </head>
-    <body>
-      <div id="root">hi</div>
-      <script type="module" src="./build.js"></script>
-    </body>
-  </html>`
-    , {
-    headers: { "content-type": "text/html; charset=uft-8" },
-  });
-
-  event.respondWith(response);
+  event.respondWith(handleRequest(event.request));
 });
