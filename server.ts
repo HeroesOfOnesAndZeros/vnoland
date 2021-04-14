@@ -67,7 +67,7 @@ const port = 3000
 
   addEventListener("fetch", (event) => {
     // renderToString generates html string from JSX components.
-    const response = new Response(vueServerRenderer(App, (res:any)=> {
+    const response = new Response(vueServerRenderer(App, (err:any, res:any)=> {
       return res
     }), {
       headers: { "content-type": "text/html; charset=uft-8" },
