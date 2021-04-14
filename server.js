@@ -53,9 +53,7 @@ import { renderToString } from "https://x.lcas.dev/preact@10.5.12/ssr.js";
 function App() {
   return (
     <html>
-      <head>
-       
-      </head>
+      <head></head>
       <body>
         <h1>Hello world</h1>
       </body>
