@@ -53,7 +53,7 @@ addEventListener("fetch", (event) => {
   const response = new Response(`<html>
     <head>
     
-       ${styles}
+    
       
     </head>
     <body>
