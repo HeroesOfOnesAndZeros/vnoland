@@ -47,27 +47,27 @@ const port = 3000
 
 
    addEventListener("fetch", (event) => {
-    import  vueServerRenderer from 'https://deno.land/x/vue_server_renderer@/mod.js';
 
-    import App from './vno-ssr/build.js';
-    let rendered;
-    vueServerRenderer(App, (err:any, res:any) => {
-      rendered = res;
-    });
+    // let rendered;
+    // vueServerRenderer(App, (err:any, res:any) => {
+    //   rendered = res;
+    // });
     
-    const html =
-    `<html>
-       <head>
+    // const html =
+    // `<html>
+    //    <head>
        
-          ${styles}
+    //       ${styles}
          
-       </head>
-       <body>
-         <div id="root">${rendered}</div>
-         <script type="module" src="./build.js"></script>
-       </body>
-     </html>`;
-    const response = new Response(html, {
+    //    </head>
+    //    <body>
+    //      <div id="root">${rendered}</div>
+    //      <script type="module" src="./build.js"></script>
+    //    </body>
+    //  </html>`;
+    const response = new Response(vueServerRenderer(App, (err:any, res:any) => {
+      return res;
+        }), {
       headers: { "content-type": "text/plain" },
     });
     event.respondWith(response);
