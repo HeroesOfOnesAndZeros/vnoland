@@ -22,18 +22,18 @@ import  styles  from './vno-ssr/style.js'
       //   return res;
       // });
       
-      const html =
-      `<html>
-         <head>
+      // const html =
+      // `<html>
+      //    <head>
          
-            ${styles}
+      //       ${styles}
            
-         </head>
-         <body>
-           <div id="root">${rendered}</div>
-           <script type="module" src="./build.js"></script>
-         </body>
-       </html>`;
+      //    </head>
+      //    <body>
+      //      <div id="root">${rendered}</div>
+      //      <script type="module" src="./build.js"></script>
+      //    </body>
+      //  </html>`;
        
     
 
