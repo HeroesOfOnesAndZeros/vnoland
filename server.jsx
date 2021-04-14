@@ -16,10 +16,10 @@ import  styles  from './vno-ssr/style.js'
 
 
 //app.use("/", (req, res, next) => {
-      function application(arg){
-      let rendered;
-      vueServerRenderer(App, (err, res) => {
-        rendered = res;
+  
+     
+      let rendered = vueServerRenderer(App, (err, res) => {
+        return res;
       });
       
       const html =
@@ -34,8 +34,8 @@ import  styles  from './vno-ssr/style.js'
            <script type="module" src="./build.js"></script>
          </body>
        </html>`;
-       return html
-    }
+       
+    
 
     //res.type("text/html").send(html);
   //});
@@ -50,7 +50,18 @@ import  styles  from './vno-ssr/style.js'
 
 addEventListener("fetch", (event) => {
   // renderToString generates html string from JSX components.
-  const response = new Response(application(App), {
+  const response = new Response(`<html>
+    <head>
+    
+       ${styles}
+      
+    </head>
+    <body>
+      <div id="root">${rendered}</div>
+      <script type="module" src="./build.js"></script>
+    </body>
+  </html>`
+    , {
     headers: { "content-type": "text/html; charset=uft-8" },
   });
 
