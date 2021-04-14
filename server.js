@@ -15,44 +15,72 @@ import  styles  from './vno-ssr/style.js'
 
 
 
-//app.use("/", (req, res, next) => {
-  function Application(App){
-      let rendered;
-      vueServerRenderer(App, (err, res) => {
-        rendered = res
-      });
+// //app.use("/", (req, res, next) => {
+//   function Application(App){
+//       let rendered;
+//       vueServerRenderer(App, (err, res) => {
+//         rendered = res
+//       });
       
-      const html =
-      `<html>
-         <head>
+//       const html =
+//       `<html>
+//          <head>
          
-            ${styles}
+//             ${styles}
            
-         </head>
-         <body>
-           <div id="root">${rendered}</div>
-           <script type="module" src="./build.js"></script>
-         </body>
-       </html>`;
-       return html
-    }
-    //res.type("text/html").send(html);
-  //});
+//          </head>
+//          <body>
+//            <div id="root">${rendered}</div>
+//            <script type="module" src="./build.js"></script>
+//          </body>
+//        </html>`;
+//        return html
+//     }
+//     //res.type("text/html").send(html);
+//   //});
 
-// app.listen({ port });
+// // app.listen({ port });
   
-//console.log(`Vue SSR App listening on port ${port}`);
+// //console.log(`Vue SSR App listening on port ${port}`);
+
+// // You need to import `h` factory function as Deno Deploy
+// // uses it instead of `React.createElement`
+
+// // You need to import `h` factory function as Deno Deploy
+// // uses it instead of `React.createElement`
+
+
+// addEventListener("fetch", (event) => {
+//   // renderToString generates html string from JSX components.
+//   const response = new Response(Application(App), {
+//     headers: { "content-type": "text/html; charset=uft-8" },
+//   });
+
+//   event.respondWith(response);
+// });
+
 
 // You need to import `h` factory function as Deno Deploy
 // uses it instead of `React.createElement`
+import { h } from "https://x.lcas.dev/preact@10.5.12/mod.js";
+import { renderToString } from "https://x.lcas.dev/preact@10.5.12/ssr.js";
 
-// You need to import `h` factory function as Deno Deploy
-// uses it instead of `React.createElement`
-
+function App() {
+  return (
+    <html>
+      <head>
+        <title>Hello from JSX</title>
+      </head>
+      <body>
+        <h1>Hello world</h1>
+      </body>
+    </html>
+  );
+}
 
 addEventListener("fetch", (event) => {
   // renderToString generates html string from JSX components.
-  const response = new Response(Application(App), {
+  const response = new Response(renderToString(<App />), {
     headers: { "content-type": "text/html; charset=uft-8" },
   });
 
