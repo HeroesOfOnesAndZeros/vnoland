@@ -43,29 +43,34 @@ const port = 3000
 //console.log(`Vue SSR App listening on port ${port}`);
 
 
-
+  function App(){
+    let rendered;
+    vueServerRenderer(App, (err:any, res:any) => {
+      rendered = res;
+    });
+    
+    const html =
+    `<html>
+       <head>
+       
+          ${styles}
+         
+       </head>
+       <body>
+         <div id="root">${rendered}</div>
+         <script type="module" src="./build.js"></script>
+       </body>
+     </html>`;
+     return html
+  }
 
 
    addEventListener("fetch", (event) => {
 
-    // let rendered;
-    // vueServerRenderer(App, (err:any, res:any) => {
-    //   rendered = res;
-    // });
     
-    // const html =
-    // `<html>
-    //    <head>
-       
-    //       ${styles}
-         
-    //    </head>
-    //    <body>
-    //      <div id="root">${rendered}</div>
-    //      <script type="module" src="./build.js"></script>
-    //    </body>
-    //  </html>`;
-    const response = new Response(vueServerRenderer(App)) , {
+    const response = new Response(App,{
+
+    }, {
       headers: { "content-type": "text/plain" },
     };
     event.respondWith(response);
