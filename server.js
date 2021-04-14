@@ -57,7 +57,7 @@ addEventListener("fetch", (event) => {
       
     </head>
     <body>
-      <div id="root">${rendered}</div>
+      <div id="root">hi</div>
       <script type="module" src="./build.js"></script>
     </body>
   </html>`
