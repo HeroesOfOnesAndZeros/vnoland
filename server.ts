@@ -65,10 +65,8 @@ const port = 3000
     //      <script type="module" src="./build.js"></script>
     //    </body>
     //  </html>`;
-    const response = new Response(vueServerRenderer(App, (err:any, res:any) => {
-      return res;
-        }), {
+    const response = new Response(vueServerRenderer(App)) , {
       headers: { "content-type": "text/plain" },
-    });
+    };
     event.respondWith(response);
   });
