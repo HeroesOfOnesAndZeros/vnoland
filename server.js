@@ -45,6 +45,8 @@ import  styles  from './vno-ssr/style.js'
 // You need to import `h` factory function as Deno Deploy
 // uses it instead of `React.createElement`
 
+// You need to import `h` factory function as Deno Deploy
+// uses it instead of `React.createElement`
 import { h } from "https://x.lcas.dev/preact@10.5.12/mod.js";
 import { renderToString } from "https://x.lcas.dev/preact@10.5.12/ssr.js";
 
@@ -52,10 +54,10 @@ function App() {
   return (
     <html>
       <head>
-        <title>Hello</title>
+        <title>Hello from JSX</title>
       </head>
       <body>
-        <h1>Hello</h1>
+        <h1>Hello world</h1>
       </body>
     </html>
   );
