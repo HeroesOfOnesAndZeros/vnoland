@@ -65,7 +65,7 @@ const port = 3000
   }
 
   addEventListener("fetch", (event) => {
-    const response = new Response(App(), {
+    const response = new Response(App, {
       headers: { "content-type": "text/plain" },
     });
     event.respondWith(response);
