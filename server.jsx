@@ -16,24 +16,26 @@ import  styles  from './vno-ssr/style.js'
 
 
 //app.use("/", (req, res, next) => {
+      function application(arg){
+      let rendered;
+      vueServerRenderer(App, (err, res) => {
+        rendered = res;
+      });
       
-      // let rendered;
-      // vueServerRenderer(App, (err:any, res:any) => {
-      //   rendered = res;
-      // });
-      
-      // const html =
-      // `<html>
-      //    <head>
+      const html =
+      `<html>
+         <head>
          
-      //       ${styles}
+            ${styles}
            
-      //    </head>
-      //    <body>
-      //      <div id="root">${rendered}</div>
-      //      <script type="module" src="./build.js"></script>
-      //    </body>
-      //  </html>`;
+         </head>
+         <body>
+           <div id="root">${rendered}</div>
+           <script type="module" src="./build.js"></script>
+         </body>
+       </html>`;
+       return html
+    }
 
     //res.type("text/html").send(html);
   //});
@@ -44,24 +46,11 @@ import  styles  from './vno-ssr/style.js'
 
 // You need to import `h` factory function as Deno Deploy
 // uses it instead of `React.createElement`
-import { h } from "https://x.lcas.dev/preact@10.5.12/mod.js";
-import { renderToString } from "https://x.lcas.dev/preact@10.5.12/ssr.js";
-function App() {
-  return (
-    <html>
-      <head>
-        {styles}
-      </head>
-      <body>
-        {rendered}
-      </body>
-    </html>
-  );
-}
+
 
 addEventListener("fetch", (event) => {
   // renderToString generates html string from JSX components.
-  const response = new Response(renderToString(<App />), {
+  const response = new Response(application(App), {
     headers: { "content-type": "text/html; charset=uft-8" },
   });
 
