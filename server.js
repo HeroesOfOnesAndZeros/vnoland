@@ -18,8 +18,8 @@ import  styles  from './vno-ssr/style.js'
 //app.use("/", (req, res, next) => {
       
       let rendered;
-      vueServerRenderer(App, (err:any, res:any) => {
-        rendered = res;
+      vueServerRenderer(App, (err, res) => {
+        rendered = res
       });
       
       const html =
